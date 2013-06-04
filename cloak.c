@@ -29,13 +29,6 @@
 
 static char cloak_checksum[64];
 
-#undef KEY1
-#undef KEY2
-#undef KEY3
-#define KEY1 cloak_key1
-#define KEY2 cloak_key2
-#define KEY3 cloak_key3
-
 DLLFUNC char *hidehost(char *host);
 DLLFUNC char *cloakcsum();
 
@@ -46,7 +39,7 @@ Callback *cloak = NULL, *cloak_csum = NULL;
 ModuleHeader MOD_HEADER(cloak)
   = {
   "cloak",
-  "v1.0",
+  "v1.0.1",
   "Simply Cloak by GHOSTnew",
   "3.2-b8-1",
   NULL
@@ -83,27 +76,10 @@ DLLFUNC int MOD_UNLOAD(cloak)(int module_unload)
 {
 	return MOD_SUCCESS;
 }
-/*
-static int check_badrandomness(char *key)
-{
-char gotlowcase=0, gotupcase=0, gotdigit=0;
-char *p;
-	for (p=key; *p; p++)
-		if (islower(*p))
-			gotlowcase = 1;
-		else if (isupper(*p))
-			gotupcase = 1;
-		else if (isdigit(*p))
-			gotdigit = 1;
 
-	if (gotlowcase && gotupcase && gotdigit)
-		return 0;
-	return 1;
-}*/
 
 DLLFUNC char *hidehost(char *host)
 {
-        //char *p;
         static char result[512];
         ircsprintf(result, "internet");
 	return result;
